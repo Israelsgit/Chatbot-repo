@@ -71,7 +71,7 @@ body {
     opacity: 0;
 }
 .show-chatbot .chatbot {
-    transform: scale(.9);
+    transform: scale(1);
     pointer-events: auto;
     opacity: 1;
 }
