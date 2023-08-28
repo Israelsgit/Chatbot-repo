@@ -56,10 +56,10 @@ const handleChat = () => {
 
     setTimeout(() => {
         const incomingChatLi = createChatLi("Thinking...", "incoming")
-        chatbox.appendChild(incomingChatLi  );
+        chatbox.appendChild(incomingChatLi);
         chatbox.scrollTo(0, chatbox.scrollHeight);
         generateResponse(incomingChatLi);
-    }, 600);
+    }, 400);
 
 };
 chatInput.addEventListener("input", () => {
