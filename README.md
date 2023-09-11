@@ -6,8 +6,6 @@ Welcome to the OpenAI Chatbot project! This chatbot is powered by OpenAI's GPT-3
 
 - **Natural Language Interaction:** The chatbot can engage in human-like conversations, making interactions with users feel more intuitive and natural.
 
-- **Multi-turn Conversations:** The chatbot can remember previous messages in a conversation, ensuring coherent and context-aware dialogues.
-
 - **Rich Responses:** The chatbot can generate text in response to a wide range of queries, making it suitable for various applications like customer support, learning, and more.
 
 ## Getting Started
