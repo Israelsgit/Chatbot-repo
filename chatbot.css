@@ -46,6 +46,8 @@ body {
     position: fixed;
     right: 40px;
     bottom: 100px;
+    background-position: center;
+    background-size: 50%;
     background:url(images/Line\,\ art\,\ wallpaper\,\ _\ Cool\ wallpapers\ art\,\ Abstract\ art\ wallpaper\,\ Japanese\ wallpaper\ iphone.jpeg) ;
     border-radius: 15px;
     transform-origin: bottom right;

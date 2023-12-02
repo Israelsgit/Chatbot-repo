@@ -5,7 +5,7 @@ const chatbotToggler = document.querySelector(".chatbot-toggler");
 const chatbotCloseBtn = document.querySelector(".close-btn");
 
 let userMessage;
-const API_KEY = "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";
+const API_KEY = API_KEY;
 const inputInitHeight = chatInput.scrollHeight;
 
 const createChatLi = (message, className) => {
@@ -20,29 +20,47 @@ const createChatLi = (message, className) => {
 };
 
 const generateResponse = (incomingChatLi) => {
-    const API_URL = "https://api.openai.com/v1/chat/completions"
-    const messageElement  = incomingChatLi.querySelector("p");
+  // Define the API URL for OpenAI chat completions
+  const API_URL = "https://api.openai.com/v1/chat/completions";
 
-    const requestOptions = {
-        method: "POST",
-        headers: {
-            "Content-type": "application/json",
-            "Authorization": `Bearer ${API_KEY}`
-        },
-        body: JSON.stringify({
-            model: "gpt-3.5-turbo",
-            messages: [{role: "user", content: userMessage}]
-        })
-    }
+  // Extract the user message from the incoming chat element
+  const messageElement = incomingChatLi.querySelector("p");
+  const userMessage = messageElement.textContent;
 
-    // Send POST request to API, get response 
-    fetch(API_URL, requestOptions).then( res => res.json()).then(data => {
-        messageElement.textContent = data.choices[0].message.content;
-    }).catch((error) => {
-        messageElement.classList.add("error");
-        messageElement.textContent = "Oops! Something went wrong. Please try again. ";  
-    }).finally(() => chatbox.scrollTo(0, chatbox.scrollHeight));
-};    
+  // Construct the request body for the API call
+  const requestOptions = {
+    method: "POST",
+    headers: {
+      "Content-type": "application/json",
+      "Authorization": `Bearer ${API_KEY}`, // Replace with your OpenAI API key
+    },
+    body: JSON.stringify({
+      model: "gpt-3.5-turbo", // Specify the desired GPT-J model
+      messages: [{
+        role: "user", // Indicate the message is from the user
+        content: userMessage, // Pass the user's message content
+      }],
+    }),
+  };
+
+  // Send POST request to the OpenAI API and process the response
+  fetch(API_URL, requestOptions)
+    .then((response) => response.json()) // Convert response to JSON format
+    .then((data) => {
+      // Update the message element with the AI's response
+      messageElement.textContent = data.choices[0].message.content;
+    })
+    .catch((error) => {
+      // Handle errors during the API call
+      messageElement.classList.add("error"); // Add error class to the message element
+      messageElement.textContent = "Oops! Something went wrong. Please try again."; // Display error message
+    })
+    .finally(() => {
+      // Scroll the chatbox to the bottom
+      chatbox.scrollTo(0, chatbox.scrollHeight);
+    });
+};
+
 
 const handleChat = () => {
     userMessage = chatInput.value.trim();
@@ -60,7 +78,7 @@ const handleChat = () => {
         chatbox.scrollTo(0, chatbox.scrollHeight);
         generateResponse(incomingChatLi);
     }, 400);
-
+    
 };
 chatInput.addEventListener("input", () => {
     chatInput.style.height = `${inputInitHeight}px`;   
